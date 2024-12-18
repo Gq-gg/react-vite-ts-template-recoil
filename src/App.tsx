@@ -1,6 +1,8 @@
+import { useRoutes } from "react-router-dom";
 import "./App.css";
+import { routes } from "./routers/routers";
 
 function App() {
-  return <div style={{ color: "red", fontSize: "50px" }}>还在创作当中。。。。</div>;
+  return <div>{useRoutes(routes)}</div>;
 }
 export default App;
