@@ -9,7 +9,17 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "eslint": "eslint . --fix --cache --report-unused-disable-directives",
-    "stylelint": "stylelint \"**/*.{less,css,scss}\" --fix --cache"
+    "stylelint": "stylelint \"**/*.{less,css,scss}\" --fix --cache",
+    "prepare": "husky install",
+    "commit": "git add . && git cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable":{
+      "config":"./cz-config.cjs"
+    }
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
@@ -23,18 +33,23 @@
     "recoil": "^0.7.7"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
     "@eslint/js": "^9.15.0",
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "commitizen": "^4.3.1",
+    "cz-customizable": "^7.3.0",
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.12.0",
+    "husky": "^8.0.0",
     "less": "^4.2.1",
     "postcss": "^8.4.49",
     "postcss-less": "^6.0.0",
