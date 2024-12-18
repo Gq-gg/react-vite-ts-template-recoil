@@ -1,0 +1,8 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit" // 保存时自动修复
+  },
+  "editor.formatOnSave": true, // 保存时自动格式化
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 默认格式化插件使用 prettier
+  "stylelint.validate": ["css", "less", "scss", "sass", "react"] // stylelint 校验的文件类型
+}
