@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import dayjs from "dayjs";
-import { RecoilRoot } from "recoil";
 import { THEME_TOKEN } from "./data/theme.ts";
 import App from "./App.tsx";
 
@@ -22,9 +21,7 @@ createRoot(document.getElementById("root")!).render(
         }}
         locale={zhCN}
       >
-        <RecoilRoot>
-          <App />
-        </RecoilRoot>
+        <App />
       </ConfigProvider>
     </BrowserRouter>
   </StrictMode>,
