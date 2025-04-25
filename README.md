@@ -44,9 +44,11 @@ cp .env.example .env
 cp .env.example .env.development
 cp .env.example .env.production
 
-### 4. 🖊️ 启动开发服务器
+### 4. 🖊️ 指令
 ```bash
-pnpm run dev
+pnpm run dev -- 开发环境运行
+pnpm run build -- 生产打包
+pnpm run commit -- 提交git命令
 ```
 ### 5. ⚙️ 生产环境构建：
 ``` bash
@@ -54,15 +56,17 @@ pnpm run build
 pnpm run preview
 ```
 
-### 5. 项目结构
-src/
-├── services/          # API请求封装
-├── assets/            # 静态资源
-├── components/        # 公共组件
-├── pages/             # 页面组件
-├── routes/            # 路由配置
-├── stores/            # 状态管理
-├── styles/            # 全局样式
-├── utils/             # 工具函数
-├── App.tsx            # 根组件
-└── main.tsx           # 应用入口
+### 5. 📂 项目结构
+    src/
+    ├── services/          # API请求封装
+    ├── assets/            # 静态资源
+    ├── components/        # 公共组件
+    ├── pages/             # 页面组件
+    ├── routes/            # 路由配置
+    ├── stores/            # 状态管理
+    ├── styles/            # 全局样式
+    ├── utils/             # 工具函数
+    ├── App.tsx            # 根组件
+    └── main.tsx           # 应用入口
+
+
