@@ -32,24 +32,29 @@
 ```bash
 git clone https://github.com/Gq-gg/react-vite-ts-template-recoil.git
 cd react-vite-ts-template-recoil
-
-2. 安装项目
+```
+### 2. ⏬ 安装项目
+```bash
 pnpm install
+```
 
-3. 配置环境变量
+### 3. 🔧 配置环境变量
 # 复制环境变量示例文件
 cp .env.example .env
 cp .env.example .env.development
 cp .env.example .env.production
 
-4. 启动开发服务器
+### 4. 🖊️ 启动开发服务器
+```bash
 pnpm run dev
-
-5. 生产环境构建：
+```
+### 5. ⚙️ 生产环境构建：
+``` bash
 pnpm run build
 pnpm run preview
+```
 
-项目结构
+### 5. 项目结构
 src/
 ├── services/          # API请求封装
 ├── assets/            # 静态资源
