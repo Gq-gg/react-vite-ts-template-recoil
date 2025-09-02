@@ -27,7 +27,11 @@
       "@components/*": ["src/components/*"],
       "@stores/*": ["src/stores/*"],
       "@services/*": ["src/services/*"],
-      "@utils/*": ["src/utils/*"]
+      "@assets/*": ["src/assets/*"],
+      "@utils/*": ["src/utils/*"],
+      "@data/*": ["src/data/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@middlewares/*": ["src/middlewares/*"]
     }
   },
   "include": ["src"]

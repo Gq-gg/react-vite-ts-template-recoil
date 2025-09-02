@@ -3,19 +3,15 @@ import { InternalAxiosRequestConfig } from "axios";
 
 export const handleChangeRequestHeader = (config: InternalAxiosRequestConfig<any>) => {
   config.headers["Content-Type"] = "application/json";
-  config.headers["X-Token"] = localStorage.getItem("token") || "";
+  config.headers["Authorization"] = localStorage.getItem("token")
+    ? JSON.parse(localStorage.getItem("token")!)
+    : "";
+  config.headers["ngrok-skip-browser-warning"] = "anyvalue";
   return config;
 };
-
-// export const handleConfigureAuth = (
-//   config: InternalAxiosRequestConfig<any>,
-// ) => {
-//   config.headers['token'] = localStorage.getItem('token') || '';
-//   return config;
-// };
 export const handleNetworkError = (errStatus?: number): void => {
   const networkErrMap: any = {
-    400: "错误的请求", // token 失效
+    400: "错误的请求",
     401: "未授权，请重新登录",
     403: "拒绝访问",
     404: "请求错误，未找到该资源",
@@ -30,14 +26,17 @@ export const handleNetworkError = (errStatus?: number): void => {
   };
   if (errStatus) {
     message.error(networkErrMap[errStatus] ?? `其他连接错误 --${errStatus}`);
+    if (errStatus == 401) {
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 500);
+    }
     return;
   }
-
   message.error("无法连接到服务器！");
 };
 
 export const handleAuthError = (errno: number): boolean => {
-  console.log("errStatus=========>>>>>>>>>>", errno);
   const authErrMap: any = {
     10031: "登录失效，需要重新登录", // token 失效
     10032: "您太久没登录，请重新登录~", // token 过期
@@ -48,11 +47,8 @@ export const handleAuthError = (errno: number): boolean => {
     10037: "账号已无效",
     10038: "账号未找到",
   };
-
   if (authErrMap[errno] !== undefined) {
     message.error(authErrMap[errno]);
-    // 授权错误，登出账户
-    // logout();
     return false;
   }
 
@@ -60,8 +56,13 @@ export const handleAuthError = (errno: number): boolean => {
 };
 
 export const handleGeneralError = (errno: number, errmsg: string): boolean => {
-  if (errno == 0) {
+  if (errno !== 0) {
     message.error(errmsg);
+    if (errno == 401) {
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 500);
+    }
     return false;
   }
 

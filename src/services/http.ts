@@ -1,10 +1,5 @@
 import axios from "axios";
-import {
-  handleChangeRequestHeader,
-  // handleConfigureAuth,
-  // handleGeneralError,
-  handleNetworkError,
-} from "./tools";
+import { handleChangeRequestHeader, handleGeneralError, handleNetworkError } from "./tools";
 
 type Fn = (data: FcResponse<any>) => unknown;
 
@@ -28,13 +23,22 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use(
   (response) => {
-    if (response.status !== 200) return Promise.reject(response.data);
-    handleNetworkError(response.data.code);
-    // handleGeneralError(response.data.code, response.data.message);
+    // ✅ 正确检查2xx状态码
+    if (response.status < 200 || response.status >= 300) {
+      handleNetworkError(response.status); // 处理HTTP错误
+      return Promise.reject(response);
+    }
+
+    // ✅ 处理业务层错误（假设code=0表示成功）
+    if (response.data.code && response.data?.code !== 200) {
+      handleGeneralError(response.data.code, response.data.message);
+      return Promise.reject(response.data);
+    }
+
     return response;
   },
   (err) => {
-    handleNetworkError(err?.code);
+    handleNetworkError(err?.status);
     Promise.reject(err);
   },
 );
@@ -66,7 +70,7 @@ export const Get = <T>(
 
 export const Post = <T>(
   url: string,
-  data: IAnyObj,
+  data: unknown,
   params: IAnyObj = {},
 ): Promise<[any, FcResponse<T> | undefined]> => {
   return new Promise((resolve) => {
@@ -74,6 +78,22 @@ export const Post = <T>(
       .post(url, data, { params })
       .then((result) => {
         resolve([null, result.data as FcResponse<T>]);
+      })
+      .catch((err) => {
+        resolve([err, undefined]);
+      });
+  });
+};
+export const PostOnData = <T>(
+  url: string,
+  data: IAnyObj,
+  params: IAnyObj = {},
+): Promise<[any, T | undefined]> => {
+  return new Promise((resolve) => {
+    axios
+      .post(url, data, { params })
+      .then((result) => {
+        resolve([null, result.data]); // 直接返回 data 中的值
       })
       .catch((err) => {
         resolve([err, undefined]);

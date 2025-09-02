@@ -5,7 +5,7 @@ const routeConfig: RouteConfig[] = [
   {
     element: lazy(() => import("../layouts/BasicLayout/basicLayout")),
     middlewares: [
-      // lazy(() => import("@/middlewares/AuthMiddleware")),
+      lazy(() => import("@middlewares/AuthMiddleware/index")),
       // lazy(() => import("@/middlewares/AdminMiddleware")),
     ],
     children: [

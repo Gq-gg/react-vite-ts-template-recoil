@@ -23,6 +23,10 @@ export default defineConfig((mode) => {
         "@stores": path.resolve(__dirname, "src/", "stores"),
         "@services": path.resolve(__dirname, "src/", "services"),
         "@utils": path.resolve(__dirname, "src/", "utils"),
+        "@assets": path.resolve(__dirname, "src/", "assets"),
+        "@data": path.resolve(__dirname, "src/", "data"),
+        "@hooks": path.resolve(__dirname, "src/", "hooks"),
+        "@middlewares": path.resolve(__dirname, "src/", "middlewares"),
       },
     },
     // proxy 代理
